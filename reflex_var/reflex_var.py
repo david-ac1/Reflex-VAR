@@ -146,14 +146,21 @@ def playing_view() -> rx.Component:
     return rx.center(
         rx.vstack(
             rx.heading("REPLAYING ACTION...", color=COLOR_PRIMARY, font_family="JetBrains Mono"),
-            rx.video(
-                url=GameState.video_url,
-                playing=True,
-                muted=True,
-                controls=False,
-                width="800px",
-                height="450px",
-                border_radius="12px",
+            rx.cond(
+                GameState.phase == GamePhase.PLAYING,
+                rx.video(
+                    src=GameState.video_url,
+                    playing=True,
+                    muted=True,
+                    controls=False,
+                    plays_inline=True,
+                    width="100%",
+                    height="auto",
+                    max_width="1000px",
+                    border_radius="12px",
+                    border=f"2px solid {COLOR_PRIMARY}",
+                    style={"pointer-events": "none"},
+                ),
             ),
             spacing="4",
         ),
@@ -168,13 +175,18 @@ def var_freeze_view() -> rx.Component:
             rx.box(
                 # The "Video" Frame (frozen at the end of the replay)
                 rx.box(
-                    rx.video(
-                        url=GameState.video_url,
-                        playing=False,
-                        muted=True,
-                        controls=False,
-                        width="100%",
-                        height="100%",
+                    rx.cond(
+                        GameState.phase == GamePhase.VAR_FREEZE,
+                        rx.video(
+                            src=GameState.video_url,
+                            playing=False,
+                            muted=True,
+                            controls=False,
+                            plays_inline=True,
+                            width="100%",
+                            height="100%",
+                            style={"object-fit": "cover", "pointer-events": "none"},
+                        ),
                     ),
                     width="92vw",
                     height="78vh",
@@ -183,7 +195,6 @@ def var_freeze_view() -> rx.Component:
                     box_shadow=f"0 0 20px {COLOR_SECONDARY}66",
                     overflow="hidden",
                     position="relative",
-                    filter="grayscale(50%) brightness(70%)",
                     on_click=GameState.handle_click,
                 ),
                 # Dynamic Scan Line
@@ -215,6 +226,16 @@ def var_freeze_view() -> rx.Component:
                         font_weight="bold",
                         letter_spacing="0.4em",
                         animation="pulse 1.5s infinite",
+                        margin_bottom="8px",
+                    ),
+                    rx.text(
+                        "CLICK ON THE AGENT'S POSITION TO ANALYZE",
+                        color=COLOR_PRIMARY,
+                        font_family="JetBrains Mono",
+                        font_size="12px",
+                        font_weight="bold",
+                        letter_spacing="0.2em",
+                        text_align="center",
                     ),
                     position="absolute",
                     top="50%",
@@ -259,6 +280,7 @@ def var_freeze_view() -> rx.Component:
                     padding="16px",
                     border_radius="12px",
                     border="1px solid rgba(255, 255, 255, 0.1)",
+                    pointer_events="none",
                 ),
                 position="relative",
             )
@@ -277,6 +299,7 @@ def result_view() -> rx.Component:
             # Left: Analysis Result
             rx.vstack(
                 rx.vstack(
+                    rx.text(f"MATCH: {GameState.match_name}", color=COLOR_PRIMARY, size="1", font_family="JetBrains Mono", letter_spacing="0.1em"),
                     rx.text("STATUS: ANALYSIS COMPLETE", color=COLOR_SUCCESS, size="1", font_weight="bold", letter_spacing="0.3em"),
                     rx.heading(
                         "ACCURACY - ",
@@ -292,6 +315,74 @@ def result_view() -> rx.Component:
                     ),
                     align_items="start",
                     spacing="1",
+                ),
+                # New: Analysis Comparison Frame
+                rx.box(
+                    rx.box(
+                        # Pro Target (The "Truth")
+                        rx.box(
+                            rx.box(width="1px", height="100%", background_color=COLOR_SUCCESS, opacity=0.8),
+                            rx.box(width="100%", height="1px", background_color=COLOR_SUCCESS, opacity=0.8),
+                            rx.box(
+                                width="12px", height="12px", 
+                                border=f"2px solid {COLOR_SUCCESS}", 
+                                border_radius="full",
+                                background_color=f"{COLOR_SUCCESS}33",
+                            ),
+                            position="absolute",
+                            left=f"{GameState.target_x * 100}%",
+                            top=f"{GameState.target_y * 100}%",
+                            transform="translate(-50%, -50%)",
+                            display="flex",
+                            align_items="center",
+                            justify_content="center",
+                            z_index="10",
+                        ),
+                        # User Selection
+                        rx.box(
+                            rx.box(width="1px", height="100%", background_color=COLOR_PRIMARY, opacity=0.8),
+                            rx.box(width="100%", height="1px", background_color=COLOR_PRIMARY, opacity=0.8),
+                            rx.box(
+                                width="12px", height="12px", 
+                                border=f"2px solid {COLOR_PRIMARY}", 
+                                border_radius="full",
+                                background_color=f"{COLOR_PRIMARY}33",
+                            ),
+                            position="absolute",
+                            left=f"{GameState.user_x * 100}%",
+                            top=f"{GameState.user_y * 100}%",
+                            transform="translate(-50%, -50%)",
+                            display="flex",
+                            align_items="center",
+                            justify_content="center",
+                            z_index="5",
+                        ),
+                        # Background Video (Static Frame)
+                        rx.cond(
+                            GameState.phase == GamePhase.RESULT,
+                            rx.video(
+                                src=GameState.video_url,
+                                playing=False,
+                                muted=True,
+                                controls=False,
+                                plays_inline=True,
+                                width="100%",
+                                height="100%",
+                                opacity=0.8,
+                                style={"object-fit": "cover", "pointer-events": "none"},
+                            ),
+                        ),
+                        width="100%",
+                        height="100%",
+                        position="relative",
+                    ),
+                    width="100%",
+                    height="300px",
+                    border_radius="12px",
+                    border=f"1px solid {COLOR_SURFACE}",
+                    overflow="hidden",
+                    margin_top="24px",
+                    background_color="black",
                 ),
                 # AI Feedback Panel
                 rx.box(
@@ -311,8 +402,8 @@ def result_view() -> rx.Component:
                             rx.text(
                                 rx.cond(
                                     GameState.accuracy > 90,
-                                    "World-Class performance! Your spatial awareness matches the pro data point exactly. You correctly identified the ability cast node.",
-                                    "Good attempt. You were slightly off the target coordinate. Focus on the player's pivot point for higher precision next time."
+                                    f"World-Class performance during {GameState.match_name}! Your spatial awareness matches {GameState.player_name}'s data point exactly.",
+                                    f"Good attempt on {GameState.player_name}'s play. You were slightly off the target coordinate in the {GameState.match_name} analysis."
                                 ),
                                 color="white",
                                 opacity=0.7,

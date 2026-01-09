@@ -34,6 +34,7 @@ class GameState(rx.State):
     # Telemetry data for display
     player_name: str = "C9_OXY"
     event_type: str = "ability_cast"
+    match_name: str = "VCT Americas: Cloud9 vs LOUD"
     timestamp: str = "00:14:22:04"
     frame_id: str = "RX-9922-84"
     video_url: str = "https://reflex-var-assets.s3.amazonaws.com/c9_oxy_flash.mp4"
@@ -74,6 +75,7 @@ class GameState(rx.State):
         
         self.player_name = clutch_data["player"]
         self.event_type = clutch_data["event"]
+        self.match_name = clutch_data.get("match", "Official Match")
         self.timestamp = clutch_data["timestamp"]
         self.target_x = clutch_data["target_x"]
         self.target_y = clutch_data["target_y"]
@@ -81,10 +83,12 @@ class GameState(rx.State):
         self.video_url = clutch_data["video_url"]
         self.is_live = clutch_data["is_live"]
         
-        # Simulate the "Video" playing for 2 seconds
+        print(f"[DEBUG_LOG] Loading video: {self.video_url}")
+        
+        # Simulate the "Video" playing for 6 seconds to ensure buffering and display
         yield
-        await asyncio.sleep(2)
-        print("[DEBUG_LOG] Transitioning to VAR_FREEZE")
+        await asyncio.sleep(6)
+        print(f"[DEBUG_LOG] Transitioning to VAR_FREEZE with URL: {self.video_url}")
         self.phase = GamePhase.VAR_FREEZE
 
     def trigger_freeze(self):
@@ -103,8 +107,14 @@ class GameState(rx.State):
                 raw_x = event_dict.get("clientX", 0)
                 raw_y = event_dict.get("clientY", 0)
                 
+                # We need to map the click on the 92vw x 78vh box to 0-1
+                # For now, let's keep it simple as a ratio of common 1080p
                 self.user_x = raw_x / 1920.0
                 self.user_y = raw_y / 1080.0
+                
+                # Ensure values are within 0-1
+                self.user_x = max(0.0, min(1.0, self.user_x))
+                self.user_y = max(0.0, min(1.0, self.user_y))
             except Exception as e:
                 print(f"[DEBUG_LOG] Error parsing click coords: {e}")
                 self.user_x = 0.5
