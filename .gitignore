@@ -4,3 +4,5 @@ assets/external/
 .states
 .web
 *.py[cod]
+
+.env

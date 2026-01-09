@@ -21,6 +21,9 @@ class GameState(rx.State):
     # User Input
     user_initials: str = ""
     
+    def set_user_initials(self, val: str):
+        self.user_initials = val.upper()[:3]
+
     # GRID Data / Game Logic
     target_x: float = 0.5
     target_y: float = 0.5
@@ -33,6 +36,8 @@ class GameState(rx.State):
     event_type: str = "ability_cast"
     timestamp: str = "00:14:22:04"
     frame_id: str = "RX-9922-84"
+    video_url: str = "https://reflex-var-assets.s3.amazonaws.com/c9_oxy_flash.mp4"
+    is_live: bool = False
 
     def submit_score(self):
         if self.user_initials:
@@ -50,10 +55,14 @@ class GameState(rx.State):
 
     @rx.var
     def leaderboard(self) -> list[ScoreEntry]:
-        with rx.session() as session:
-            return session.exec(
-                ScoreEntry.select().order_by(ScoreEntry.accuracy.desc()).limit(5)
-            ).all()
+        try:
+            with rx.session() as session:
+                return session.exec(
+                    ScoreEntry.select().order_by(ScoreEntry.accuracy.desc()).limit(5)
+                ).all()
+        except Exception:
+            # Return empty list if database is not yet initialized
+            return []
 
     async def start_var_review(self):
         print("[DEBUG_LOG] start_var_review called")
@@ -69,6 +78,8 @@ class GameState(rx.State):
         self.target_x = clutch_data["target_x"]
         self.target_y = clutch_data["target_y"]
         self.frame_id = clutch_data["frame_id"]
+        self.video_url = clutch_data["video_url"]
+        self.is_live = clutch_data["is_live"]
         
         # Simulate the "Video" playing for 2 seconds
         yield

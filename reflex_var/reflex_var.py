@@ -11,14 +11,6 @@ COLOR_SECONDARY = "#7B61FF"
 COLOR_SUCCESS = "#00FF94"
 COLOR_CRITICAL = "#FF4D00"
 
-# Animations
-scan_anim = rx.keyframes(
-    {
-        "0%": {"top": "0%"},
-        "100%": {"top": "100%"},
-    }
-)
-
 def header() -> rx.Component:
     return rx.box(
         rx.hstack(
@@ -154,7 +146,15 @@ def playing_view() -> rx.Component:
     return rx.center(
         rx.vstack(
             rx.heading("REPLAYING ACTION...", color=COLOR_PRIMARY, font_family="JetBrains Mono"),
-            rx.spinner(color=COLOR_PRIMARY, size="3"),
+            rx.video(
+                url=GameState.video_url,
+                playing=True,
+                muted=True,
+                controls=False,
+                width="800px",
+                height="450px",
+                border_radius="12px",
+            ),
             spacing="4",
         ),
         height="100vh",
@@ -166,8 +166,16 @@ def var_freeze_view() -> rx.Component:
         header(),
         rx.center(
             rx.box(
-                # The "Video" Frame (represented as a box with background for now)
+                # The "Video" Frame (frozen at the end of the replay)
                 rx.box(
+                    rx.video(
+                        url=GameState.video_url,
+                        playing=False,
+                        muted=True,
+                        controls=False,
+                        width="100%",
+                        height="100%",
+                    ),
                     width="92vw",
                     height="78vh",
                     border_radius="12px",
@@ -175,9 +183,6 @@ def var_freeze_view() -> rx.Component:
                     box_shadow=f"0 0 20px {COLOR_SECONDARY}66",
                     overflow="hidden",
                     position="relative",
-                    background_image="url('https://lh3.googleusercontent.com/aida-public/AB6AXuCkddXEfL1xuRGhvNeE5LjZhcwOXbNqZV-dy1bROG2tgr3tlzpOFphvhgs9O7r-SyZ1RZV-dy1bROG2tgr3tlzpOFphvhgs9O7r-SyZ1Rzf7wSlOvUrmz_KBune_cZ0on57H94p8evUGLZj0zyJH1w_vX3z867-dbTkxxpVoMysse5m_DlXOL5cT1zARMQQ-PjqD8ynSUH92EN66DcCPUb5nr1LsITKZ2u95XUUPRXX_SEOjileqddMk5uzLWAT-WbsEu-LpLgFiV4me4wiImGIVCsjQjofbLhn_0CnH7Ebyb49Dv-HI')",
-                    background_size="cover",
-                    background_position="center",
                     filter="grayscale(50%) brightness(70%)",
                     on_click=GameState.handle_click,
                 ),
@@ -190,7 +195,14 @@ def var_freeze_view() -> rx.Component:
                     top="0",
                     left="0",
                     z_index="5",
-                    animation=f"{scan_anim} 3s linear infinite",
+                    # Inline keyframes for better compatibility
+                    style={
+                        "@keyframes scan": {
+                            "0%": {"top": "0%"},
+                            "100%": {"top": "100%"},
+                        },
+                        "animation": "scan 3s linear infinite",
+                    },
                     pointer_events="none",
                 ),
                 # Glassmorphism Scanning Overlay
@@ -273,6 +285,11 @@ def result_view() -> rx.Component:
                         font_weight="black",
                         color="white",
                     ),
+                    rx.cond(
+                        GameState.is_live,
+                        rx.badge("LIVE GRID TELEMETRY", color_scheme="green", variant="solid", margin_top="8px"),
+                        rx.badge("LOCAL DATA FALLBACK", color_scheme="gray", variant="outline", margin_top="8px"),
+                    ),
                     align_items="start",
                     spacing="1",
                 ),
@@ -342,6 +359,24 @@ def result_view() -> rx.Component:
                     width="100%",
                     margin_top="12px",
                     font_weight="bold",
+                ),
+                # Option D: QR Code Share
+                rx.vstack(
+                    rx.text("SCAN TO TAKE SCORE HOME", color="white", size="1", font_weight="bold", opacity=0.6),
+                    rx.box(
+                        rx.image(
+                            src=f"https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://reflex-var.com/share?score={GameState.accuracy}%26initials={GameState.user_initials}",
+                            width="120px",
+                            height="120px",
+                        ),
+                        padding="8px",
+                        background_color="white",
+                        border_radius="8px",
+                    ),
+                    align_items="center",
+                    width="100%",
+                    margin_top="24px",
+                    spacing="2",
                 ),
                 rx.button(
                     "RETRY CHALLENGE",
