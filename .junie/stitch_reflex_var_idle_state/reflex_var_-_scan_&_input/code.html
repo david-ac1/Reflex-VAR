@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Reflex VAR - Scan &amp; Input</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              colors: {
+                "primary": "#00b0f0",
+                "ai-purple": "#7B61FF",
+                "frost-white": "#F0F4F8",
+                "background-light": "#f5f8f8",
+                "background-dark": "#0f1e23",
+              },
+              fontFamily: {
+                "display": ["Space Grotesk", "sans-serif"],
+                "mono": ["JetBrains Mono", "monospace"]
+              },
+              borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+            },
+          },
+        }
+    </script>
+<style>
+        .glass-panel {
+            background: rgba(15, 30, 35, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .ai-border {
+            box-shadow: inset 0 0 0 4px #7B61FF, 0 0 20px rgba(123, 97, 255, 0.4);
+        }
+        .crosshair-line {
+            background-color: rgba(0, 176, 240, 0.5);
+        }
+        .scanline {
+            height: 2px;
+            background: linear-gradient(to right, transparent, #7B61FF, transparent);
+            position: absolute;
+            width: 100%;
+            z-index: 10;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-white overflow-hidden h-screen w-screen">
+<!-- Top Navigation Bar -->
+<header class="absolute top-0 left-0 w-full z-50 flex items-center justify-between px-8 py-4 bg-background-dark/80 backdrop-blur-md border-b border-white/10">
+<div class="flex items-center gap-4">
+<div class="size-6 text-primary">
+<svg fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M8.57829 8.57829C5.52816 11.6284 3.451 15.5145 2.60947 19.7452C1.76794 23.9758 2.19984 28.361 3.85056 32.3462C5.50128 36.3314 8.29667 39.7376 11.8832 42.134C15.4698 44.5305 19.6865 45.8096 24 45.8096C28.3135 45.8096 32.5302 44.5305 36.1168 42.134C39.7033 39.7375 42.4987 36.3314 44.1494 32.3462C45.8002 28.361 46.2321 23.9758 45.3905 19.7452C44.549 15.5145 42.4718 11.6284 39.4217 8.57829L24 24L8.57829 8.57829Z" fill="currentColor"></path>
+</svg>
+</div>
+<h2 class="text-lg font-bold tracking-widest uppercase">REFLEX VAR <span class="text-primary">// SYSTEM ACTIVE</span></h2>
+</div>
+<div class="flex items-center gap-8">
+<nav class="flex gap-6">
+<a class="text-sm font-medium hover:text-primary transition-colors border-b-2 border-primary pb-1" href="#">LIVE FEED</a>
+<a class="text-sm font-medium text-white/60 hover:text-white transition-colors pb-1" href="#">REPLAY</a>
+<a class="text-sm font-medium text-white/60 hover:text-white transition-colors pb-1" href="#">HISTORY</a>
+</nav>
+<div class="flex gap-3">
+<button class="flex items-center justify-center rounded-lg size-10 bg-white/5 hover:bg-white/10 transition-colors">
+<span class="material-symbols-outlined text-[20px]">settings</span>
+</button>
+<button class="flex items-center justify-center rounded-lg size-10 bg-white/5 hover:bg-white/10 transition-colors">
+<span class="material-symbols-outlined text-[20px]">wifi</span>
+</button>
+<button class="flex items-center justify-center rounded-lg size-10 bg-white/5 hover:bg-white/10 transition-colors">
+<span class="material-symbols-outlined text-[20px]">schedule</span>
+</button>
+</div>
+<div class="h-10 w-10 rounded-full border border-primary bg-cover bg-center" data-alt="User profile avatar" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBO4FALoHkT3CDAw_z5ihsghVljr_d0BPXxo--E6IT7KM-I4US7ftBj_44urXXeoULpYBfpxRV6HLXwnA37_kwYllJPTJpUvw2Yv7Gn6j1xzZnnPChdthl5B3NMv5FrtrIY-FyHfhwNoI4-L-8fVmOVeI-I3gpmp100692Mko2mGlNVcDURrHNaDDN7IpAVtk9Z60t-S1jZc06GjoQf4NtpbBuIWTk0Kttpc_d3paQQ7fV-u23XRGGwVys8lBBOaRuDmBVbdyXnURwT');"></div>
+</div>
+</header>
+<!-- Main Viewport (The Freeze Frame) -->
+<main class="relative h-screen w-screen flex items-center justify-center overflow-hidden pt-20 pb-12">
+<!-- AI VAR Border & Background Image -->
+<div class="relative w-[92vw] h-[78vh] rounded-xl overflow-hidden ai-border group">
+<div class="absolute inset-0 bg-cover bg-center" data-alt="Frozen frame of professional soccer play in high resolution" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCkddXEfL1xuRGhvNeE5LjZhcwOXbNqZV-dy1bROG2tgr3tlzpOFphvhgs9O7r-SyZ1Rzf7wSlOvUrmz_KBune_cZ0on57H94p8evUGLZj0zyJH1w_vX3z867-dbTkxxpVoMysse5m_DlXOL5cT1zARMQQ-PjqD8ynSUH92EN66DcCPUb5nr1LsITKZ2u95XUUPRXX_SEOjileqddMk5uzLWAT-WbsEu-LpLgFiV4me4wiImGIVCsjQjofbLhn_0CnH7Ebyb49Dv-HI');">
+<!-- Dark Overlay for Readability -->
+<div class="absolute inset-0 bg-black/30"></div>
+</div>
+<!-- Scanning Prompt Overlay -->
+<div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
+<div class="glass-panel px-10 py-6 rounded-xl border border-ai-purple/50 animate-pulse">
+<p class="text-frost-white tracking-[0.4em] text-3xl font-bold uppercase text-center">SCANNING PLAY... SELECT TARGET</p>
+</div>
+</div>
+<!-- Dynamic Crosshair UI (Simulated centered position) -->
+<div class="absolute top-1/2 left-1/3 -translate-x-1/2 -translate-y-1/2 pointer-events-none z-20">
+<div class="relative flex items-center justify-center size-24">
+<div class="absolute w-px h-full crosshair-line"></div>
+<div class="absolute h-px w-full crosshair-line"></div>
+<div class="size-4 border-2 border-primary rounded-full bg-primary/20"></div>
+<!-- Coordinate Metadata -->
+<div class="absolute top-12 left-12 font-mono text-[10px] text-primary bg-black/80 px-2 py-1 rounded border border-primary/30">
+                        X: 142.029<br/>Y: 891.442
+                    </div>
+</div>
+</div>
+<!-- HUD Elements - Scanning Progress -->
+<div class="absolute bottom-10 left-1/2 -translate-x-1/2 w-96 z-30">
+<div class="glass-panel p-4 rounded-xl border border-white/5">
+<div class="flex justify-between items-center mb-2">
+<span class="text-[10px] font-bold tracking-widest text-ai-purple">AI SCANNING PROGRESS</span>
+<span class="text-[10px] font-mono text-ai-purple">88%</span>
+</div>
+<div class="h-1.5 bg-white/10 rounded-full overflow-hidden">
+<div class="h-full bg-ai-purple rounded-full" style="width: 88%"></div>
+</div>
+<p class="text-[10px] text-white/50 mt-2 font-mono italic">CALCULATING PLAYER TRAJECTORIES...</p>
+</div>
+</div>
+</div>
+<!-- Left Sidebar: Manual Override -->
+<aside class="absolute left-8 top-1/2 -translate-y-1/2 w-64 glass-panel rounded-xl p-6 z-40">
+<div class="mb-8">
+<h1 class="text-white text-lg font-bold leading-tight">Manual Override</h1>
+<p class="text-primary text-xs font-medium tracking-tighter uppercase opacity-80">Precision Controls</p>
+</div>
+<nav class="flex flex-col gap-3">
+<div class="flex items-center gap-3 px-4 py-3 rounded-lg bg-primary text-background-dark cursor-pointer shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1">track_changes</span>
+<p class="text-sm font-bold">Calibrate</p>
+</div>
+<div class="flex items-center gap-3 px-4 py-3 rounded-lg bg-white/5 hover:bg-white/10 transition-colors cursor-pointer group">
+<span class="material-symbols-outlined text-white/60 group-hover:text-white">refresh</span>
+<p class="text-sm font-medium text-white/70 group-hover:text-white">Reset Zoom</p>
+</div>
+<div class="flex items-center gap-3 px-4 py-3 rounded-lg bg-white/5 hover:bg-white/10 transition-colors cursor-pointer group">
+<span class="material-symbols-outlined text-white/60 group-hover:text-white">heat_pump</span>
+<p class="text-sm font-medium text-white/70 group-hover:text-white">Toggle Heatmap</p>
+</div>
+<div class="flex items-center gap-3 px-4 py-3 rounded-lg bg-white/5 hover:bg-white/10 transition-colors cursor-pointer group">
+<span class="material-symbols-outlined text-white/60 group-hover:text-white">terminal</span>
+<p class="text-sm font-medium text-white/70 group-hover:text-white">System Log</p>
+</div>
+</nav>
+<button class="w-full mt-10 py-4 bg-ai-purple hover:bg-ai-purple/80 text-white font-bold rounded-lg tracking-widest text-sm transition-all shadow-lg shadow-ai-purple/20">
+                LOCK TARGET
+            </button>
+</aside>
+<!-- Right Sidebar: Detected Entities -->
+<aside class="absolute right-8 top-1/2 -translate-y-1/2 w-72 glass-panel rounded-xl p-6 z-40 overflow-hidden">
+<div class="mb-6 flex justify-between items-center">
+<h3 class="font-bold text-sm tracking-widest uppercase text-white/80">Detected Entities</h3>
+<span class="text-[10px] bg-primary/20 text-primary px-2 py-0.5 rounded border border-primary/30 font-mono">3 ACTIVE</span>
+</div>
+<div class="flex flex-col gap-3">
+<!-- Entity Card 1 -->
+<div class="p-4 rounded-lg bg-white/5 border border-white/10 border-l-4 border-l-primary">
+<div class="flex items-center gap-3 mb-2">
+<span class="material-symbols-outlined text-primary text-xl">person</span>
+<h4 class="font-bold text-sm">Player 07 <span class="text-white/40 text-[10px] ml-1 uppercase">(Home)</span></h4>
+</div>
+<div class="grid grid-cols-2 gap-2">
+<div class="flex flex-col">
+<span class="text-[9px] text-white/40 uppercase">Speed</span>
+<span class="font-mono text-xs text-primary">28.4 km/h</span>
+</div>
+<div class="flex flex-col">
+<span class="text-[9px] text-white/40 uppercase">Heart Rate</span>
+<span class="font-mono text-xs text-primary">164 bpm</span>
+</div>
+</div>
+</div>
+<!-- Entity Card 2 -->
+<div class="p-4 rounded-lg bg-white/5 border border-white/10 border-l-4 border-l-white/20">
+<div class="flex items-center gap-3 mb-2">
+<span class="material-symbols-outlined text-white/40 text-xl">sports_soccer</span>
+<h4 class="font-bold text-sm">Official Ball</h4>
+</div>
+<div class="grid grid-cols-2 gap-2">
+<div class="flex flex-col">
+<span class="text-[9px] text-white/40 uppercase">Velocity</span>
+<span class="font-mono text-xs">12.2 m/s</span>
+</div>
+<div class="flex flex-col">
+<span class="text-[9px] text-white/40 uppercase">Rotation</span>
+<span class="font-mono text-xs">4.1 rps</span>
+</div>
+</div>
+</div>
+<!-- Entity Card 3 -->
+<div class="p-4 rounded-lg bg-white/5 border border-white/10 border-l-4 border-l-primary">
+<div class="flex items-center gap-3 mb-2">
+<span class="material-symbols-outlined text-primary text-xl">person</span>
+<h4 class="font-bold text-sm">Player 12 <span class="text-white/40 text-[10px] ml-1 uppercase">(Home)</span></h4>
+</div>
+<div class="grid grid-cols-2 gap-2">
+<div class="flex flex-col">
+<span class="text-[9px] text-white/40 uppercase">Speed</span>
+<span class="font-mono text-xs text-primary">24.1 km/h</span>
+</div>
+<div class="flex flex-col">
+<span class="text-[9px] text-white/40 uppercase">Distance</span>
+<span class="font-mono text-xs text-primary">8.42 km</span>
+</div>
+</div>
+</div>
+</div>
+<button class="w-full mt-6 py-2 border border-white/10 hover:bg-white/5 text-white/60 hover:text-white transition-all rounded-lg text-xs font-bold uppercase tracking-widest">
+                VIEW ALL ENTITIES
+            </button>
+</aside>
+</main>
+<!-- Technical Metadata Footer -->
+<footer class="fixed bottom-0 left-0 w-full h-12 bg-background-dark border-t border-white/10 flex items-center justify-between px-8 font-mono text-[11px] text-white/50 tracking-tighter">
+<div class="flex gap-8 items-center h-full">
+<div class="flex items-center gap-2">
+<span class="text-primary font-bold">FRAME_ID:</span>
+<span>RX-9922-84</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-primary font-bold">SMPTE:</span>
+<span class="text-frost-white">00:14:22:04</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-primary font-bold">LATENCY:</span>
+<span>0.002ms</span>
+</div>
+</div>
+<div class="flex gap-8 items-center h-full">
+<div class="flex items-center gap-2">
+<span class="text-primary font-bold">COORDS:</span>
+<span>52.5200° N, 13.4050° E</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-primary font-bold">SENSOR_ARRAY:</span>
+<span class="text-green-500">ACTIVE [8/8]</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-ai-purple font-bold">AI_VERSION:</span>
+<span>v4.2.0-STABLE</span>
+</div>
+</div>
+</footer>
+</body></html>

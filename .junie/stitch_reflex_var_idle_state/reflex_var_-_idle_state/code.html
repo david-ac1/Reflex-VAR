@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Reflex VAR - Idle State</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#00b0f0",
+                        "background-light": "#f5f8f8",
+                        "background-dark": "#0b0e11",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"],
+                        "mono": ["JetBrains Mono", "monospace"]
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .scanline-overlay {
+            background: linear-gradient(to bottom, transparent 50%, rgba(0, 176, 240, 0.02) 50%);
+            background-size: 100% 4px;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-white selection:bg-primary/30 overflow-hidden">
+<!-- Main Kiosk Container -->
+<div class="relative flex min-h-screen w-full flex-col overflow-hidden">
+<!-- Background Layer: Looping Video Placeholder -->
+<div class="absolute inset-0 z-0">
+<div class="absolute inset-0 bg-gradient-to-t from-background-dark via-transparent to-background-dark/80 z-10"></div>
+<div class="absolute inset-0 bg-background-dark/40 z-10"></div>
+<div class="scanline-overlay absolute inset-0 z-20 pointer-events-none"></div>
+<div class="h-full w-full bg-cover bg-center" data-alt="Cinematic background of Cloud9 professional esports athletes in action" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDrjw_IKDeSZi9s7dD-hpumfafw252F_fPuxxGEFJrQNL2blKjl_hFKRMnfkPdP_tbASXlMaHQdXIeJV3P3WfqQTJg84sM3dRsPHQAocFER2LBeyxgTjbqC5Yy_Xk7khr_CdVs7BxYUpU4ILZmhbNQTas2IE0TIxxckI5w6SwoFE9B-sYR0jNrmgwojZjIRJj7ynw9uCh7L8BWmq-aX9fu9wwX7ikKnUsAQrWDNTHNpz4rqa5hiq0Pmc93BHWj98NIBKbtlNNV5G_Yx');">
+</div>
+</div>
+<!-- Layout Container -->
+<div class="relative z-30 flex h-full grow flex-col">
+<!-- Top Navigation Bar / Branding Overlay -->
+<div class="w-full px-10 py-8">
+<header class="flex items-center justify-between border-l-2 border-primary pl-6">
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-3">
+<div class="size-6 text-primary">
+<svg fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M42.1739 20.1739L27.8261 5.82609C29.1366 7.13663 28.3989 10.1876 26.2002 13.7654C24.8538 15.9564 22.9595 18.3449 20.6522 20.6522C18.3449 22.9595 15.9564 24.8538 13.7654 26.2002C10.1876 28.3989 7.13663 29.1366 5.82609 27.8261L20.1739 42.1739C21.4845 43.4845 24.5355 42.7467 28.1133 40.548C30.3042 39.2016 32.6927 37.3073 35 35C37.3073 32.6927 39.2016 30.3042 40.548 28.1133C42.7467 24.5355 43.4845 21.4845 42.1739 20.1739Z" fill="currentColor"></path>
+</svg>
+</div>
+<h2 class="text-xl font-bold tracking-[0.2em] uppercase">Reflex VAR</h2>
+</div>
+<div class="flex items-center gap-4 text-[10px] font-mono text-primary/70 tracking-widest uppercase">
+<span class="flex items-center gap-1"><span class="size-1.5 rounded-full bg-primary animate-pulse"></span> SYSTEM ONLINE</span>
+<span class="opacity-40">|</span>
+<span>ID: KSK-09-C9</span>
+</div>
+</div>
+<div class="flex items-center gap-8 font-mono text-[11px] tracking-tighter text-white/60">
+<div class="flex flex-col items-end">
+<span class="text-primary/80">LATENCY: 0.2ms</span>
+<span>FRAME_SYNC: ACTIVE</span>
+</div>
+<div class="flex flex-col items-end">
+<span>UPTIME: 142:12:05</span>
+<span>V1.0.4-BETA</span>
+</div>
+<div class="bg-primary/10 border border-primary/20 p-1">
+<div class="size-10 bg-cover bg-center grayscale brightness-150" data-alt="Cloud9 esports organization logo" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB2SHtvJKQbR8vrPPx7Q27JVLML4xqSQFeShTQzUc-l53KdVI-d5wJu91FeWWMk6xLjI6FpTCYX0QG_aKSbqLAbh-iJdsup9awCLr0PKt79Ts_lgG-oM78EOuzuMnxOUAungHzqqBLlP76QezChB1cf-KAMUD-1Gpw-8t7hBD_rWbJCZmbQ9t_ZDU5BbaDPAt1x6ywXOuz5iygFdExBLC48O_lgdU8CwH2HHKFLBYs2v0U9MyxVcyRaPHoBL6RhuuQrzoj_G929fZEo');"></div>
+</div>
+</div>
+</header>
+</div>
+<!-- Central Action Area -->
+<main class="flex flex-1 flex-col items-center justify-center px-4">
+<div class="max-w-[960px] w-full flex flex-col items-center">
+<!-- HUD Decorative Brackets -->
+<div class="relative w-full flex flex-col items-center">
+<div class="absolute -top-12 -left-12 size-24 border-t-2 border-l-2 border-primary/30"></div>
+<div class="absolute -top-12 -right-12 size-24 border-t-2 border-right-2 border-primary/30"></div>
+<div class="absolute -bottom-12 -left-12 size-24 border-b-2 border-l-2 border-primary/30"></div>
+<div class="absolute -bottom-12 -right-12 size-24 border-b-2 border-r-2 border-primary/30"></div>
+<h1 class="text-white tracking-[0.4em] text-[14px] font-mono leading-tight px-4 text-center pb-8 opacity-60">
+                            ELITE PERFORMANCE ANALYSIS SYSTEM
+                        </h1>
+<div class="flex flex-col items-center gap-10">
+<!-- Massive Main CTA -->
+<div class="group relative">
+<div class="absolute -inset-1 bg-primary/40 blur-xl group-hover:bg-primary/60 transition duration-1000"></div>
+<button class="relative flex min-w-[380px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-24 px-10 bg-primary text-background-dark gap-4 text-2xl font-black leading-normal tracking-[0.1em]">
+<span class="material-symbols-outlined !text-3xl" data-icon="videocam">videocam</span>
+<span class="truncate">START VAR REVIEW</span>
+</button>
+</div>
+<!-- Metadata Instructions -->
+<div class="flex flex-col items-center gap-2">
+<p class="text-primary text-xs font-mono font-bold leading-normal tracking-[0.2em] animate-pulse">
+                                    TOUCH SCREEN OR PRESS ANY KEY TO BEGIN
+                                </p>
+<div class="flex gap-1">
+<div class="h-1 w-8 bg-primary"></div>
+<div class="h-1 w-2 bg-primary/30"></div>
+<div class="h-1 w-2 bg-primary/30"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Bottom Data Footer -->
+<footer class="w-full px-10 py-8 flex justify-between items-end">
+<div class="flex flex-col gap-2">
+<div class="flex gap-4">
+<div class="h-12 w-1 bg-primary"></div>
+<div class="flex flex-col">
+<span class="text-[10px] font-mono text-white/40 uppercase tracking-widest">Global Telemetry</span>
+<span class="text-lg font-bold tracking-widest">LIVE BROADCAST FEED</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="text-right flex flex-col">
+<span class="text-[10px] font-mono text-white/40 uppercase tracking-widest">Session Status</span>
+<span class="text-sm font-mono text-primary uppercase">Ready for Input...</span>
+</div>
+<div class="flex gap-1 h-6 items-end">
+<div class="w-1 bg-primary h-2"></div>
+<div class="w-1 bg-primary h-4"></div>
+<div class="w-1 bg-primary h-6"></div>
+<div class="w-1 bg-primary h-3"></div>
+<div class="w-1 bg-primary h-5"></div>
+</div>
+</div>
+</footer>
+</div>
+<!-- Decorative Corners / Technical Glitch Lines -->
+<div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary/20 to-transparent"></div>
+<div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary/20 to-transparent"></div>
+</div>
+</body></html>

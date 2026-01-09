@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Reflex VAR - Review Outcome</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Noto+Sans:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#00b0f0",
+                        "background-light": "#f5f8f8",
+                        "background-dark": "#0f1e23",
+                        "pitch-charcoal": "#161B22",
+                        "neon-mint": "#00FF94",
+                        "jetbrains-purple": "#7F52FF",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"],
+                        "sans": ["Noto Sans", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .zebra-stripe:nth-child(even) {
+            background-color: #1c2229;
+        }
+        .scanline {
+            background: linear-gradient(to bottom, transparent 0%, rgba(0, 176, 240, 0.2) 50%, transparent 100%);
+            height: 20px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-white min-h-screen">
+<div class="layout-container flex h-full grow flex-col">
+<!-- Top Navigation -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-white/10 px-10 py-4 bg-background-dark/80 backdrop-blur-md sticky top-0 z-50">
+<div class="flex items-center gap-4 text-white">
+<div class="size-8 text-primary">
+<svg fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M42.1739 20.1739L27.8261 5.82609C29.1366 7.13663 28.3989 10.1876 26.2002 13.7654C24.8538 15.9564 22.9595 18.3449 20.6522 20.6522C18.3449 22.9595 15.9564 24.8538 13.7654 26.2002C10.1876 28.3989 7.13663 29.1366 5.82609 27.8261L20.1739 42.1739C21.4845 43.4845 24.5355 42.7467 28.1133 40.548C30.3042 39.2016 32.6927 37.3073 35 35C37.3073 32.6927 39.2016 30.3042 40.548 28.1133C42.7467 24.5355 43.4845 21.4845 42.1739 20.1739Z" fill="currentColor"></path>
+</svg>
+</div>
+<h2 class="text-white text-xl font-black leading-tight tracking-wider uppercase">Reflex VAR</h2>
+</div>
+<div class="flex flex-1 justify-end gap-8 items-center">
+<nav class="hidden md:flex items-center gap-9">
+<a class="text-primary text-sm font-bold leading-normal uppercase tracking-widest border-b-2 border-primary pb-1" href="#">Review</a>
+<a class="text-white/60 hover:text-white text-sm font-medium leading-normal transition-colors" href="#">History</a>
+<a class="text-white/60 hover:text-white text-sm font-medium leading-normal transition-colors" href="#">Leaderboard</a>
+<a class="text-white/60 hover:text-white text-sm font-medium leading-normal transition-colors" href="#">Academy</a>
+</nav>
+<div class="flex gap-3">
+<button class="flex items-center justify-center rounded-xl size-10 bg-white/5 hover:bg-white/10 text-white transition-all">
+<span class="material-symbols-outlined text-xl">settings</span>
+</button>
+<button class="flex items-center justify-center rounded-xl size-10 bg-white/5 hover:bg-white/10 text-white transition-all">
+<span class="material-symbols-outlined text-xl">notifications</span>
+</button>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 border-2 border-primary" data-alt="User profile avatar" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCN0zMzJbTDwD9y4l4Cw-IyaZFI7WFLcFcbHZwKOSASYnYF0hv4lNzZM-oa0h5QynSwR7NKlH_arwcBiblBepYN_4k3mcSIkL6vtQmgK6LyuvHY6o-dSgJ0POuzkymyPwoakVjaOVrPO8eR8hdg88jULo7-ZtSd_RqWTMWw6y0KoA4rUUh0L92PmYm3P0UNeqPAEpVOSgk7Qn_K4Dz1Gv7qIu6_InIt1M4iUqaqoyld1sKH7widLQ67B8QbU9YNEkRkBpRUf0SvNHFs");'></div>
+</div>
+</div>
+</header>
+<main class="flex-1 flex flex-col md:flex-row gap-6 p-6 max-w-[1600px] mx-auto w-full">
+<!-- Left Side: Analysis Content -->
+<div class="flex-1 flex flex-col gap-6">
+<!-- Page Heading -->
+<div class="flex flex-wrap justify-between items-end gap-3 px-2">
+<div class="flex flex-col gap-1">
+<p class="text-neon-mint text-xs font-bold tracking-[0.3em] uppercase">Status: Analysis Complete</p>
+<h1 class="text-white text-5xl font-black leading-tight tracking-tighter">OFFSIDE - <span class="text-primary">CONFIRMED</span></h1>
+<p class="text-white/50 text-base font-normal">Case ID: 2024-ELITE-X22 | Champions League Semi-Final A</p>
+</div>
+<div class="flex gap-3">
+<button class="flex min-w-[120px] cursor-pointer items-center justify-center rounded-xl h-12 px-6 bg-white/5 border border-white/10 text-white text-sm font-bold tracking-widest uppercase hover:bg-white/10 transition-all">
+                            Export Log
+                        </button>
+<button class="flex min-w-[120px] cursor-pointer items-center justify-center rounded-xl h-12 px-6 bg-primary text-background-dark text-sm font-bold tracking-widest uppercase hover:scale-105 transition-all">
+                            Share Result
+                        </button>
+</div>
+</div>
+<!-- Comparison Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+<div class="flex flex-col gap-3 group">
+<div class="relative w-full aspect-video bg-pitch-charcoal rounded-xl overflow-hidden border-2 border-primary/50 shadow-[0_0_15px_rgba(0,176,240,0.2)]">
+<div class="absolute inset-0 bg-cover bg-center opacity-80" data-alt="Frozen frame of a soccer player during an offside call" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBX7b9SHE-P_XGs4w7que4DQEUT8muatJ7runJPW0Qt53kDRe_JXbfTlmtR7Qr10sKIf9y8XWpibx0LyVu8Ol8uvaB8GPCdWGCCt7qUEsP6lS5HSxprq-jsJt_fYmJLtqMoJmtsnJUMf7PKur0wp4nA1kNtSJ_5R_nLGObNjFmbibbZ0RSpOUezYDpet1ISgyy5ICWi8mDTQdouwTXm0xqXi4owv8k4i_ayvZkfbYKs8rWBYMPKhRscTD5QLH-ldt21zJv-OmMqonBc");'></div>
+<div class="absolute inset-0 flex items-center justify-center">
+<!-- Mock UI Overlay for User Node -->
+<div class="w-[2px] h-full bg-primary/80 absolute left-1/3 shadow-[0_0_10px_#00b0f0]"></div>
+<div class="size-4 rounded-full border-2 border-primary bg-primary/20 absolute left-1/3 top-1/2 -translate-x-1/2 -translate-y-1/2 shadow-[0_0_10px_#00b0f0]"></div>
+</div>
+<div class="absolute top-4 left-4 bg-primary px-3 py-1 rounded text-[10px] font-black tracking-widest text-background-dark uppercase">User Node</div>
+<div class="absolute bottom-4 right-4 bg-black/60 backdrop-blur px-3 py-1 rounded text-[10px] font-mono text-white/80">T: 42:12:04.02</div>
+</div>
+<div class="flex justify-between items-center px-2">
+<p class="text-white text-sm font-bold tracking-wide">PLAYER_CONTACT_FRAME</p>
+<span class="text-primary text-xs font-mono">LATENCY: 0.42s</span>
+</div>
+</div>
+<div class="flex flex-col gap-3 group">
+<div class="relative w-full aspect-video bg-pitch-charcoal rounded-xl overflow-hidden border-2 border-neon-mint/50 shadow-[0_0_15px_rgba(0,255,148,0.1)]">
+<div class="absolute inset-0 bg-cover bg-center opacity-60" data-alt="Professional VAR reference frame showing same soccer moment" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDquPF8ElTnwzYfC8OM5istRDBitnXwVu_gCBrUeFnJHUEx5EiuWj1RxzApS8Ijh6cjeLY6jx-Ol6GeC8bNgJ9DYFxFSsKp0irvkIfOclgZg6aHQqT3NzN6XL_lLUv7EQ5_quReRB-FU-TXmE4g2Uq7KGXrd8_h6J2hXenpFeEPCFycPn8yUNvFLZSC5XXHE_nAN1l5Oke_ii2eBaWAlGziFZq8a_6E-7GPDxfHqsWe-DK-lMyFFDUqdy4zvhQlVkDsz5yd_voJzzEy");'></div>
+<div class="absolute inset-0 flex items-center justify-center">
+<!-- Mock UI Overlay for Pro Node -->
+<div class="w-[2px] h-full bg-neon-mint/80 absolute left-[30%] shadow-[0_0_10px_#00FF94]"></div>
+<div class="size-4 rounded-full border-2 border-neon-mint bg-neon-mint/20 absolute left-[30%] top-1/2 -translate-x-1/2 -translate-y-1/2 shadow-[0_0_10px_#00FF94]"></div>
+</div>
+<div class="absolute top-4 left-4 bg-neon-mint px-3 py-1 rounded text-[10px] font-black tracking-widest text-background-dark uppercase">Pro Node</div>
+<div class="absolute bottom-4 right-4 bg-black/60 backdrop-blur px-3 py-1 rounded text-[10px] font-mono text-white/80">T: 42:12:03.60</div>
+</div>
+<div class="flex justify-between items-center px-2">
+<p class="text-white text-sm font-bold tracking-wide">REFERENCE_MASTER</p>
+<span class="text-neon-mint text-xs font-mono">GOLD STANDARD</span>
+</div>
+</div>
+</div>
+<!-- Stats Panel -->
+<div class="flex flex-wrap gap-4">
+<div class="flex min-w-[180px] flex-1 flex-col gap-2 rounded-xl p-6 bg-pitch-charcoal border border-white/5 relative overflow-hidden group">
+<div class="absolute top-0 right-0 w-1 h-full bg-neon-mint shadow-[0_0_10px_#00FF94]"></div>
+<p class="text-white/60 text-xs font-bold uppercase tracking-widest">Accuracy Score</p>
+<div class="flex items-baseline gap-2">
+<p class="text-neon-mint text-5xl font-black leading-tight">92%</p>
+<p class="text-neon-mint/60 text-sm font-bold">+5.2% vs avg</p>
+</div>
+</div>
+<div class="flex min-w-[180px] flex-1 flex-col gap-2 rounded-xl p-6 bg-pitch-charcoal border border-white/5">
+<p class="text-white/60 text-xs font-bold uppercase tracking-widest">Delta Time</p>
+<p class="text-white text-4xl font-black leading-tight">+0.42<span class="text-lg text-white/40">s</span></p>
+</div>
+<div class="flex min-w-[180px] flex-1 flex-col gap-2 rounded-xl p-6 bg-pitch-charcoal border border-white/5">
+<p class="text-white/60 text-xs font-bold uppercase tracking-widest">Decision Grade</p>
+<p class="text-primary text-4xl font-black leading-tight tracking-widest uppercase">Elite</p>
+</div>
+</div>
+<!-- AI Feedback Panel -->
+<div class="@container">
+<div class="flex flex-1 flex-col items-start justify-between gap-6 rounded-xl border border-jetbrains-purple/30 bg-jetbrains-purple/5 p-6 @[480px]:flex-row @[480px]:items-center relative">
+<div class="absolute top-0 left-0 w-16 h-16 bg-jetbrains-purple/20 blur-2xl rounded-full -translate-x-1/2 -translate-y-1/2"></div>
+<div class="flex items-center gap-5">
+<div class="size-16 shrink-0 rounded-2xl bg-jetbrains-purple flex items-center justify-center shadow-lg shadow-jetbrains-purple/20">
+<span class="material-symbols-outlined text-white text-3xl">smart_toy</span>
+</div>
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-2">
+<p class="text-white text-lg font-bold leading-tight uppercase tracking-wide">Junie AI Feedback</p>
+<span class="px-2 py-0.5 rounded bg-jetbrains-purple/30 text-white text-[10px] font-bold">ANALYSIS PRO</span>
+</div>
+<p class="text-white/70 text-sm font-normal leading-relaxed max-w-[600px]">
+                                    Your frame selection was exceptionally close. You correctly identified the <span class="text-white font-bold">contact point</span> but placed the offside line 2 pixels too far forward on the striker's shoulder. Focus on anatomical pivot points for next time.
+                                </p>
+</div>
+</div>
+<button class="flex min-w-[120px] cursor-pointer items-center justify-center rounded-lg h-10 px-5 bg-jetbrains-purple text-white text-xs font-bold tracking-widest uppercase hover:scale-105 transition-all">
+                            View Deep-Dive
+                        </button>
+</div>
+</div>
+</div>
+<!-- Right Side: Leaderboard Panel -->
+<aside class="w-full md:w-[350px] flex flex-col gap-4">
+<div class="bg-pitch-charcoal border border-white/5 rounded-xl overflow-hidden flex flex-col h-full">
+<div class="p-5 border-b border-white/10 flex justify-between items-center">
+<h3 class="text-white text-sm font-black tracking-[0.2em] uppercase">Global Ranking</h3>
+<span class="material-symbols-outlined text-white/40 text-sm">leaderboard</span>
+</div>
+<div class="flex-1 overflow-y-auto">
+<!-- Leaderboard Entry 1 -->
+<div class="zebra-stripe p-4 flex items-center gap-4 border-l-2 border-neon-mint">
+<span class="text-xs font-mono text-white/40 w-4">01</span>
+<div class="size-10 rounded-full bg-cover bg-center border border-neon-mint/30" data-alt="Player profile thumbnail" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC1wL72fLc1Bn--rlP7CiLY4UFp8hHOG7-eCrt0BKhO0JRMUHU920I9VQu7cI4FyBagjlDPPyvj_DjVdBa94Wjaqb5nulC_LFl-1srbDMKRKkZwCx75vYeXev6tsYG4pBRoTOJEvutLQSt0_m0k7UThcLeBH7KYGqkt_xk7l9hVc8vNOBXLCIIg9snlH27NaIn6pUD_2IJCGVdru4q_wB4ZmZZGulziWUUp1Rhbawa_aShUPuloqoZkRHWxX4U7zjSjVUMOLFyQbYWa')"></div>
+<div class="flex-1">
+<p class="text-white text-xs font-bold">Reflex_Slayer</p>
+<p class="text-neon-mint text-[10px] font-bold">99% ACCURACY</p>
+</div>
+<span class="text-white/60 text-xs font-mono">0.11s</span>
+</div>
+<!-- Leaderboard Entry 2 (User) -->
+<div class="bg-primary/10 p-4 flex items-center gap-4 border-l-2 border-primary">
+<span class="text-xs font-mono text-primary w-4">04</span>
+<div class="size-10 rounded-full bg-cover bg-center border border-primary/50" data-alt="User profile thumbnail" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDvyM74crrBXS_8wsRqUZgvpmqtjkIGC4kBp3gGhPe_NAljwGyw6mvzSFcBee5c3ET7IpWNidtPmWGKPzcq9GRCG6nH4YToOdQkcN7cIcC7pafrQYKG8ZhlEA6cfLxvUiPrhyKCa6iAssTbS8Ux6d05gKC7FSex2NnOKMqShn7q8YNDxqulAXRjThqO-t6xgBIFOkYPN1F2BEEGh0O0_v1Tagu0hf48Fre7eJKX0vGE42jXdgnY1DfrOdWOaEVw0IKB_FkwYM1b8Yqe')"></div>
+<div class="flex-1">
+<p class="text-primary text-xs font-black">YOU</p>
+<p class="text-primary text-[10px] font-bold uppercase">92% ACCURACY</p>
+</div>
+<span class="text-primary text-xs font-mono">0.42s</span>
+</div>
+<!-- Leaderboard Entry 3 -->
+<div class="zebra-stripe p-4 flex items-center gap-4 border-l-2 border-transparent">
+<span class="text-xs font-mono text-white/40 w-4">05</span>
+<div class="size-10 rounded-full bg-cover bg-center border border-white/10" data-alt="Player profile thumbnail" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA-4WZQOILCq5x1KOiJ_mjvgc-OQqdt8t6xsBKVtbIaKhsyfLWBYO4n7YPKU1rvy5k22H3FY6rg58I0N3XzXTA2T9NEJkv6FAt_MbbkzPqHwvWc79ExT1uQ_O0PBNOTKcN0W1tleNqQKnINdJKnuLerHbZt2qaZbJaA9xrkuCS1q757zaz8SwbIoZ5QDKoO7AIbM8r42eqd3cPnmyOSMjoOQmWVJdbynadzzu9H352z9DpozAv9SRNlUEBG22NQs2og-0KJdHWdevII')"></div>
+<div class="flex-1">
+<p class="text-white/80 text-xs font-bold">V_Master99</p>
+<p class="text-white/40 text-[10px] font-bold">91% ACCURACY</p>
+</div>
+<span class="text-white/40 text-xs font-mono">0.45s</span>
+</div>
+<!-- Leaderboard Entry 4 -->
+<div class="zebra-stripe p-4 flex items-center gap-4 border-l-2 border-transparent">
+<span class="text-xs font-mono text-white/40 w-4">06</span>
+<div class="size-10 rounded-full bg-cover bg-center border border-white/10" data-alt="Player profile thumbnail" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAYkSG5QTMzRm1ArLox7cfdQaxWZcIXpVHuwlu5z4o0w-G0L5Q5q-8R-CvRVc3l6_OYTlX-hMv8X2oJwJrpowT8UoNqW6gEl0WPGuGKxwl3pv-tzjHE7_jGJlZzSoGaTpazwwU76hAlrV0ETsk4t24ouK6FCvk9dG6CZUV7wZ0kfPPK9ynfFNobh3Q2b-TdVo2UN3iyuTZO1a3vYND-mxoJptbbX0CS1frylS-8ajjo1xKumT6PY1vS6fn0OhJVdXVjCSbx5EGoz0T1')"></div>
+<div class="flex-1">
+<p class="text-white/80 text-xs font-bold">GoalWatcher</p>
+<p class="text-white/40 text-[10px] font-bold">89% ACCURACY</p>
+</div>
+<span class="text-white/40 text-xs font-mono">0.51s</span>
+</div>
+<!-- Leaderboard Entry 5 -->
+<div class="zebra-stripe p-4 flex items-center gap-4 border-l-2 border-transparent">
+<span class="text-xs font-mono text-white/40 w-4">07</span>
+<div class="size-10 rounded-full bg-cover bg-center border border-white/10" data-alt="Player profile thumbnail" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuArlFitslKua4c9WyXmcbX0oDT4DKrR__Zg2Wmwdl5OYvm8ax8z4QQQHeZdYIS6E2cRJV0wjdogqFX1NpMHMVRjlYOmsxTgqqTg0N0rpWeW_RK33IKDUhfXh3pNtytfPBcfGayj_7JnQ3l-XPo3HmXH43BXlOc6UI1D3CRpo8lyKqptRr1TAybcNdzYfkxBf28L3HrjbPUxhs14HEKz-vFPCVzeuw7S4zTv8Igck5BaXHRdpVOUzQRPdHyTGTt6bwcmcGNaXXT1EL-k')"></div>
+<div class="flex-1">
+<p class="text-white/80 text-xs font-bold">D_Whistle</p>
+<p class="text-white/40 text-[10px] font-bold">88% ACCURACY</p>
+</div>
+<span class="text-white/40 text-xs font-mono">0.55s</span>
+</div>
+<!-- Leaderboard Entry 6 -->
+<div class="zebra-stripe p-4 flex items-center gap-4 border-l-2 border-transparent">
+<span class="text-xs font-mono text-white/40 w-4">08</span>
+<div class="size-10 rounded-full bg-cover bg-center border border-white/10" data-alt="Player profile thumbnail" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDeU1bAaQstXIfaLmJEE92yEkQ4WY9oF2oQIgIvqj49I597PLlYYef5wQxzj5wv55HkQPEQLKn85s_aOX1Czn5HCAO6ac5iM6hozmxcs46f7_CAYMIjZx_5O6oT6lHJS7Y3C0icglfCFxI0ajt9AqnuRGAS2vwQjCW3GIqfjp3xa9WkoC9NDiol9MSe-hfloBy55lPnxxAlT_EW_-jc1rHULF5V2L1V7rfxdK6dNJ9EvdRtalbMosgduTRUhojECXzAyPy36S6Inr6j')"></div>
+<div class="flex-1">
+<p class="text-white/80 text-xs font-bold">Offside_King</p>
+<p class="text-white/40 text-[10px] font-bold">88% ACCURACY</p>
+</div>
+<span class="text-white/40 text-xs font-mono">0.58s</span>
+</div>
+</div>
+<div class="p-4 bg-black/20 mt-auto">
+<button class="w-full h-10 flex items-center justify-center gap-2 text-xs font-bold tracking-widest uppercase text-white/60 hover:text-white transition-colors">
+<span>See Full Rankings</span>
+<span class="material-symbols-outlined text-sm">open_in_new</span>
+</button>
+</div>
+</div>
+<!-- Next Actions Card -->
+<div class="bg-primary/20 border border-primary/30 rounded-xl p-6 flex flex-col gap-4">
+<p class="text-primary text-xs font-black tracking-widest uppercase">Next Task</p>
+<div class="flex flex-col">
+<h4 class="text-white text-lg font-bold">Handball Review</h4>
+<p class="text-white/60 text-xs">Difficulty: Level 4 • 250 XP Reward</p>
+</div>
+<button class="w-full py-3 bg-primary text-background-dark font-black tracking-widest uppercase rounded-lg hover:scale-[1.02] transition-transform">
+                        Start Next Trial
+                    </button>
+</div>
+</aside>
+</main>
+<!-- Bottom Info Bar -->
+<footer class="h-12 border-t border-white/5 bg-pitch-charcoal flex items-center px-10 justify-between text-[10px] font-mono tracking-widest text-white/30">
+<div class="flex gap-6 uppercase">
+<span>System: Online</span>
+<span>Latency: 14ms</span>
+<span>Node: VAR_WEST_02</span>
+</div>
+<div>© 2024 REFLEX VAR PERFORMANCE KIOSK</div>
+</footer>
+</div>
+</body></html>
